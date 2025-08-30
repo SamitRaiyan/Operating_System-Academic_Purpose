@@ -19,12 +19,15 @@ void pline(int x) {
 }
 
 int main() {
-    int num, i, j, time = 0;  // এখানে num ভ্যারিয়েবলে মোট process সংখ্যা থাকবে
+    int num, i, j, time = 0;  // num = Total number of processes.
     float avg_tat = 0, avg_wt = 0;
-    struct pcb p[10], temp;
 
     printf("Enter total number of processes: ");
     scanf("%d", &num);
+
+    struct pcb p[num+1], temp;  // The temp variable is use for sorting. 
+
+   
 
     // Input AT and BT
     for(i = 0; i < num; i++) {
