@@ -14,7 +14,9 @@ struct pcb {
 // Line printing function (void pline(int x))
 void pline(int x) {
     int i;
-    for(i = 0; i < x; i++) printf("-");
+    for(i = 0; i < x; i++){ 
+        printf("-");
+    }
     printf("\n");
 }
 
@@ -55,7 +57,7 @@ int main() {
             time = p[i].at;
         }
 
-        time += p[i].bt;
+        time += p[i].bt; // time = time + p[i].bt
         p[i].ct = time;
         p[i].tat = p[i].ct - p[i].at; // TAT = CT - AT
         p[i].wt  = p[i].tat - p[i].bt; // WT = TAT - BT

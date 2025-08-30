@@ -44,20 +44,20 @@ void main(){
         if (time < p[i].at){
             time = p[i].at;
         }
-    }
-
-    time = time + p[i].bt;
+    
+        time = time + p[i].bt;
     p[i].ct = time;
     p[i].tat = p[i].ct - p[i].at;
     p[i].wt = p[i].tat - p[i].bt;
     avg_tat = avg_tat + p[i].tat;
     avg_wt = avg_wt + p[i].wt;
-    
+    }
+
     line(60);
     printf("PID\tAT\tBT\tCT\tTAT\tWT\n");
     line(60);
     for ( i = 0; i < NoP; i++){
-        printf("P%d\t%d\t%d\t%d\t%d\n",p[i].pid,p[i].at,p[i].bt,p[i].ct,p[i].tat,p[i].wt);
+        printf("P%d\t%d\t%d\t%d\t%d\t%d\n",p[i].pid,p[i].at,p[i].bt,p[i].ct,p[i].tat,p[i].wt);
     }
     line(60);
     printf("TaT: %.3f\n",avg_tat/NoP);
