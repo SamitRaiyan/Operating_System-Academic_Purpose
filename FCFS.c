@@ -19,26 +19,27 @@ void pline(int x) {
 }
 
 int main() {
-    int num, i, j, time = 0;  // num = Total number of processes.
+    int NoP, i, j, time = 0;  // NoP = Total Number of processes.
     float avg_tat = 0, avg_wt = 0;
 
-    printf("Enter total number of processes: ");
-    scanf("%d", &num);
+    printf("Enter total Number of processes: ");
+    scanf("%d", &NoP);
 
-    struct pcb p[num+1], temp;  // The temp variable is use for sorting. 
+    struct pcb p[NoP], temp;  // The temp variable is use for sorting. 
 
    
 
     // Input AT and BT
-    for(i = 0; i < num; i++) {
+    for(i = 0; i < NoP; i++) {
         printf("Enter Arrival Time and Burst Time of Process %d: ", i+1);
         scanf("%d %d", &p[i].at, &p[i].bt);
         p[i].pid = i+1;
+    
     }
 
     // Sort by Arrival Time
-    for(i = 0; i < num-1; i++) {
-        for(j = 0; j < num-i-1; j++) {
+    for(i = 0; i < NoP-1; i++) {
+        for(j = 0; j < NoP-i-1; j++) {
             if(p[j].at > p[j+1].at) {
                 temp = p[j];
                 p[j] = p[j+1];
@@ -49,31 +50,32 @@ int main() {
 
     // Calculate CT, TAT, WT
     time = p[0].at;
-    for(i = 0; i < num; i++) {
-        if(time < p[i].at)  // যদি CPU idle থাকে
+    for(i = 0; i < NoP; i++) {
+        if(time < p[i].at){  // If CPU is idle
             time = p[i].at;
+        }
 
         time += p[i].bt;
         p[i].ct = time;
         p[i].tat = p[i].ct - p[i].at; // TAT = CT - AT
         p[i].wt  = p[i].tat - p[i].bt; // WT = TAT - BT
 
-        avg_tat += p[i].tat;
-        avg_wt  += p[i].wt;
+        avg_tat += p[i].tat;// avg_tat = avg_tat + p[i].tat;
+        avg_wt  += p[i].wt; // avg_wt = avg_wt + p[i].wt;
     }
 
     // Output
     pline(60);
     printf("PID\tAT\tBT\tCT\tTAT\tWT\n");
     pline(60);
-    for(i = 0; i < num; i++) {
+    for(i = 0; i < NoP; i++) {
         printf("P%d\t%d\t%d\t%d\t%d\t%d\n",
                p[i].pid, p[i].at, p[i].bt, p[i].ct, p[i].tat, p[i].wt);
     }
     pline(60);
 
-    printf("Average Turnaround Time = %.2f\n", avg_tat/num);
-    printf("Average Waiting Time = %.2f\n", avg_wt/num);
+    printf("Average Turnaround Time = %.2f\n", avg_tat/NoP);
+    printf("Average Waiting Time = %.2f\n", avg_wt/NoP);
 
     return 0;
 }
